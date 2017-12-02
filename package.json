@@ -1,0 +1,17 @@
+{
+  "name": "finalproject",
+  "version": "1.0.0",
+  "description": "Webserver for final project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "ejs": "*",
+    "express": "*",
+    "mysql": "*",
+    "opsworks": "^0.1.3"
+  },
+  "author": "Dane Walton",
+  "license": "ISC"
+}
