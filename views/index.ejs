@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <meta name="description" content="">
+  <meta name="author" content="Dane Walton">
+  <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500" rel="stylesheet">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.js" type="text/javascript"></script>
+  <title>Final Project</title>
+  <style>
+  body {
+    font-family: raleway
+  }
+
+  .wrapper {
+    display: grid;
+    grid-template-columns: 100px auto 10px auto 100px;
+    grid-gap: 10px;
+    grid-template-rows: 25% auto;
+  }
+
+  button {
+    font-family: raleway
+  }
+
+  #data {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  #chart {
+    grid-column: 4;
+    grid-row: 2;
+  }
+
+  #demo {
+    font-size: 30px;
+  }
+  </style>
+</head>
+
+<body>
+  <div class='wrapper'>
+    <div id='data'>
+      <h1>Group 1 CIS541 Final Project</h1>
+      <div>
+        <h3>Heart Beat: <span id="demo"></span></h3>
+        <button id='newdata'>Clear Channel</button>
+      </div>
+    </div>
+    <iframe id='chart' width="700" height="500" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/379383/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=100&type=line&update=15&width=700&height=500"></iframe>
+  </div>
+  <script>
+  $(document).ready(function() {
+    $("#newdata").click(function() {
+      var requestUrl = "https://api.thingspeak.com/channels/379383/feeds.json/?api_key=T7IPM5LRWLSILFE5";
+      console.log("Before the request")
+      $.ajax({
+        url: requestUrl,
+        type: "DELETE",
+        error: function(err) {
+          console.log(err);
+        },
+        success: function(result) {
+          console.log("Sent request");
+        }
+      });
+    });
+
+    setInterval(function() {
+      $.get("http://localhost:3000/data", function(data, status) {
+        $("#demo").html(data);
+        var dataNum = parseInt(data);
+        if (dataNum == 1) {
+          document.body.style.backgroundColor = "red";
+        } else {
+          document.body.style.backgroundColor = "green";
+        }
+      });
+    }, 1000);
+  });
+  </script>
+</body>
+
+</html>

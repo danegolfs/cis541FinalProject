@@ -7,11 +7,16 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "ejs": "*",
+    "ejs": "^2.5.7",
     "express": "*",
+    "https": "^1.0.0",
     "mysql": "*",
     "opsworks": "^0.1.3"
   },
   "author": "Dane Walton",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/danegolfs/cis541FinalProject.git"
+  }
 }
